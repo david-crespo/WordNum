@@ -1,4 +1,5 @@
 import Data.List (sort, nub, delete, group)
+import qualified Data.Map as Map
 
 {-|
 Consider the word { x_1, x_2, ... , x_n }. This solution is based
@@ -40,6 +41,35 @@ choose n k = choose (n-1) (k-1) * n `div` k
 eltCounts :: Ord a => [a] -> [Integer]
 eltCounts = (map (toInteger . length)) . group . sort
 
--- Remove old from list, put new in. Order is irrelevant.
+-- remove old from the list and put new in. we don't
+-- bother to put new at the same index because we don't
+-- care about the order here
 replace :: Eq a => a -> a -> [a] -> [a]
 replace new old list = new:(delete old list)
+
+
+-----------------------------------
+-- Testing
+-----------------------------------
+
+answers = Map.fromList [("abab", 2),
+                        ("aaab", 1),
+                        ("baaa", 4),
+                        ("question", 24572),
+                        ("bookkeeper", 10743)]
+
+test = if allWordsCorrect then putStrLn "pass" else putStrLn "fail" where
+    allWordsCorrect = all testWord (Map.keys answers)
+
+testWord :: String -> Bool
+testWord word = (myAnswer == rightAnswer) where
+    rightAnswer = answers Map.! word
+    myAnswer = wordNum word
+
+verboseTest = map verboseTestWord (Map.keys answers)
+
+verboseTestWord :: String -> (String, Integer, Integer)
+verboseTestWord word = (word, myAnswer, rightAnswer) where
+    rightAnswer = answers Map.! word
+    myAnswer = wordNum word
+
