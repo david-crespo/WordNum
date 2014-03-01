@@ -3,6 +3,10 @@ WordNum
 
 This is my Haskell solution to a fun little problem a coworker showed me.
 
+##### Usage
+
+Load comb.hs and run the function `wordNum` on a word, or run `test` (no arguments) to make sure it works.
+
 ##### My TL;DR of the problem (original below)
 
 Consider a word (ignore case). There are many possible rearrangements of the letters in that word. Put those possibilities in alphabetical order and number each one by its position in that alphabetical list. Write a program that takes a word and tells you that number. For example, the number for BAAA is 4 because we have
