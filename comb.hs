@@ -21,19 +21,16 @@ wordNum (x:xs) = totalLowerPerms + (wordNum xs) where
 perms :: Ord a => [a] -> Integer
 perms = perms' . eltCounts
 
--- Element counts (e.g., [2,2,1]) to uniq perms count
+-- Element counts (e.g., [2,2,1]) to the number of unique
+-- permutations. The number of possibilities if there
+-- were no duplicates is (2 + 2 + 1) factorial. Then we
+-- divide by 2!, 2! and 1! to account for the duplicates.
 perms' :: [Integer] -> Integer
 perms' [] = 1
-perms' (a:as) = firstLetterPerms * perms' as where
-    firstLetterPerms = slots `choose` a where
-        slots = sum (a:as)
-
--- How many unique ways there are to choose k things
--- from a set of n where the order is irrelevant
-choose :: Integer -> Integer -> Integer
-choose n 0 = 1
-choose 0 k = 0
-choose n k = choose (n-1) (k-1) * n `div` k 
+perms' l = fact total `div` duplication where
+    total = sum l
+    duplication = product $ map fact l
+    fact n = product [1..n]
 
 -- given a list of elements, create a list of element counts
 -- e.g., "ababc" produces the list [2,2,1] because there are
