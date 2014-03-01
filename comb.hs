@@ -1,21 +1,19 @@
 import Data.List (sort, nub, delete, group)
 import qualified Data.Map as Map
 
-{-|
-Consider the word { x_1, x_2, ... , x_n }. This solution is based
-on the the idea that the word number will be the sum of two
-quantities: (1) the number of combinations starting with letters
-lower in the alphabet than x_0, and (2) how far we are into the
-words starting with x_0. The second quantity happens to be the
-word number of the word { x_2, ... , x_n }. This points to a
-recursive implementation.
--}
+-- see readme for a top-level explanation
 wordNum :: Ord a => [a] -> Integer
 wordNum [] = 1
 wordNum (x:xs) = totalLowerPerms + (wordNum xs) where
     uniqLowers = nub $ filter ((>) x) xs
-    totalLowerPerms = sum permsForEachLower
-    permsForEachLower = map perms [replace x lowLet xs | lowLet <- uniqLowers]
+    totalLowerPerms = sum [permsStartingWith letter (x:xs) | letter <- uniqLowers]
+
+-- the number of unique permutations of a word starting with a
+-- particular letter in that word is simply the total number
+-- of permutations of the rest of the letters in that word
+permsStartingWith :: Ord a => a -> [a] -> Integer
+permsStartingWith letter word = perms wordMinusLetter where
+    wordMinusLetter = delete letter word
 
 -- unique perms of letters in a word
 perms :: Ord a => [a] -> Integer
@@ -37,13 +35,6 @@ perms' l = fact total `div` duplication where
 -- 2 As, 2 Bs, and 1 C
 eltCounts :: Ord a => [a] -> [Integer]
 eltCounts = (map (toInteger . length)) . group . sort
-
--- remove old from the list and put new in. we don't
--- bother to put new at the same index because we don't
--- care about the order here
-replace :: Eq a => a -> a -> [a] -> [a]
-replace new old list = new:(delete old list)
-
 
 -----------------------------------
 -- Testing
