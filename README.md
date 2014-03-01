@@ -25,6 +25,12 @@ Consider the n-letter word { x<sub>1</sub>, x<sub>2</sub>, ... , x<sub>n</sub> }
 
 The trick is that the second quantity happens to happens to be the word number of the word { x<sub>2</sub>, ... , x<sub>n</sub> }. This suggests a recursive implementation.
 
+Getting the first quantity is a little complicated:
+
+1. Let `uniqLowers` =  { u<sub>1</sub>, u<sub>2</sub>, ... , u<sub>m</sub> } = all the unique letters lower than x<sub>1</sub>
+2. For each u<sub>j</sub>, count the number of permutations starting with u<sub>j</sub>.
+3. Add all those up.
+
 ##### The original problem text
 
 Consider a "word" as any sequence of capital letters A-Z (not limited to just "dictionary words"). For any word with at least two different letters, there are other words composed of the same letters but in a different order (for instance, stationarily/antiroyalist, which happen to both be dictionary words; for our purposes "aaiilnorstty" is also a "word" composed of the same letters as these two). We can then assign a number to every word, based on where it falls in an alphabetically sorted list of all words made up of the same set of letters. One way to do this would be to generate the entire list of words and find the desired one, but this would be slow if the word is long.
