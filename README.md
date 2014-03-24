@@ -20,8 +20,8 @@ Consider a word (ignore case). There are many possible rearrangements of the let
 
 Consider the n-letter word { x<sub>1</sub>, x<sub>2</sub>, ... , x<sub>n</sub> }. My solution is based on the the idea that the word number will be the sum of two quantities:
 
-1. The number of combinations starting with letters lower in the alphabet than x<sub>0</sub>, and
-2. how far we are into the the arrangements that start with with x<sub>0</sub>.
+1. The number of combinations starting with letters lower in the alphabet than x<sub>1</sub>, and
+2. how far we are into the the arrangements that start with with x<sub>1</sub>.
 
 The trick is that the second quantity happens to happens to be the word number of the word { x<sub>2</sub>, ... , x<sub>n</sub> }. This suggests a recursive implementation.
 
