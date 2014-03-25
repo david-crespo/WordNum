@@ -23,7 +23,7 @@ Consider the n-letter word { x<sub>1</sub>, x<sub>2</sub>, ... , x<sub>n</sub> }
 1. The number of combinations starting with letters lower in the alphabet than x<sub>1</sub>, and
 2. how far we are into the the arrangements that start with x<sub>1</sub>.
 
-The trick is that the second quantity happens to happens to be the word number of the word { x<sub>2</sub>, ... , x<sub>n</sub> }. This suggests a recursive implementation.
+The trick is that the second quantity happens to be the word number of the word { x<sub>2</sub>, ... , x<sub>n</sub> }. This suggests a recursive implementation.
 
 Getting the first quantity is a little complicated:
 
@@ -39,12 +39,8 @@ Write a program which takes a word as a command line argument and prints to stan
 
 Sample words, with their rank:
 
-ABAB = 2
-
-AAAB = 1
-
-BAAA = 4
-
-QUESTION = 24572
-
+ABAB = 2 <br>
+AAAB = 1 <br>
+BAAA = 4 <br>
+QUESTION = 24572 <br>
 BOOKKEEPER = 10743
